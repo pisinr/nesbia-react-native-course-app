@@ -9,12 +9,36 @@ import {
 import profileImage from './assets/profile.png';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      count: 0,
+    }
+
+    this.handleUp = this.handleUp.bind(this);
+    this.handleDown = this.handleDown.bind(this);
+  }
+
+  handleUp () {
+    console.log('up')
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+
+  handleDown () {
+    console.log('down')
+    this.setState({
+      count: this.state.count - 1
+    })
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>0</Text>
-        <Button color='green' title="เพิ่ม" />
-        <Button color='red' title="ลด" />
+        <Text style={styles.title}>{this.state.count.toString()}</Text>
+        <Button onPress={this.handleUp} color='green' title="เพิ่ม" />
+        <Button onPress={this.handleDown} color='red' title="ลด" />
       </SafeAreaView>
     );
   }
