@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SafeAreaView,
   StyleSheet, Text, View,
-  Image
+  Image, ScrollView,
 } from 'react-native';
 
 import profileImage from './assets/profile.png';
@@ -16,11 +16,14 @@ export default class App extends React.Component {
           <Text style={styles.expandedText}>2</Text>
           <Text style={styles.expandedText}>3</Text>
         </View>
-        <View style={styles.main}>
-          <Text style={styles.title}>Hello</Text>
+        <ScrollView style={styles.main}>
           <Image style={styles.image} source={profileImage} />
-          <Text style={styles.text}>Icon from FreePik!</Text>
-        </View>
+          <Image style={styles.image} source={profileImage} />
+          <Image style={styles.image} source={profileImage} />
+          <Image style={styles.image} source={profileImage} />
+          <Image style={styles.image} source={profileImage} />
+          <Image style={styles.image} source={profileImage} />
+        </ScrollView>
         <View style={styles.bottombar}>
           <Text style={styles.text}>I am bottom text</Text>
         </View>
@@ -33,7 +36,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ddd',
-    alignItems: 'center',
   },
 
   topbar: {
@@ -50,6 +52,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
     backgroundColor: '#eee',
     width: 200,
     height: 200,
