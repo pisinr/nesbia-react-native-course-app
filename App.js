@@ -12,39 +12,18 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstname: '',
-      lastname: '',
     }
-
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-  }
-
-  handleFirstNameChange (text) {
-    this.setState({
-      firstname: text
-    })
-  }
-
-  handleLastNameChange (text) {
-    this.setState({
-      lastname: text
-    })
   }
 
   render() {
-    const nameLength = this.state.firstname.length + this.state.lastname.length;
-
     return (
       <SafeAreaView style={styles.container}>
         <TextInput style={styles.textinput}
-          onChangeText={this.handleFirstNameChange}
-          value={this.state.firstname} />
+          value={''} />
         <TextInput style={styles.textinput}
-          onChangeText={this.handleLastNameChange}
-          value={this.state.lastname} />
-        <Text style={styles.title}>คุณชื่อ: {this.state.firstname} {this.state.lastname}</Text>
-        <Text style={styles.title}>ยาวทั้งหมด: {nameLength} ตัวอักษร</Text>
+          value={''} />
+        <Text style={styles.title}>คุณชื่อ:</Text>
+        <Text style={styles.title}>ยาวทั้งหมด: 0 ตัวอักษร</Text>
       </SafeAreaView>
     );
   }
