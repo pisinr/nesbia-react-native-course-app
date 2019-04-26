@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   StyleSheet, Text, View,
   Image, ScrollView, FlatList,
-  Button, TextInput,
+  Button, TextInput, WebView,
 } from 'react-native';
 
 import profileImage from './assets/profile.png';
@@ -12,39 +12,40 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstname: '',
-      lastname: '',
+      url: '',
+      gourl: '',
     }
 
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
+    this.handleURLChange = this.handleURLChange.bind(this);
+    this.handleGo = this.handleGo.bind(this);
   }
 
-  handleFirstNameChange (text) {
+  handleURLChange (text) {
     this.setState({
-      firstname: text
+      url: text
     })
   }
 
-  handleLastNameChange (text) {
+  handleGo () {
     this.setState({
-      lastname: text
+      gourl: this.state.url
     })
   }
 
   render() {
-    const nameLength = this.state.firstname.length + this.state.lastname.length;
 
     return (
       <SafeAreaView style={styles.container}>
-        <TextInput style={styles.textinput}
-          onChangeText={this.handleFirstNameChange}
+        <TextInput
+          autoCapitalize='none'
+          autoCorrect={false}
+          autoFocus={true}
+          style={styles.textinput}
+          onChangeText={this.handleURLChange}
           value={this.state.firstname} />
-        <TextInput style={styles.textinput}
-          onChangeText={this.handleLastNameChange}
-          value={this.state.lastname} />
-        <Text style={styles.title}>คุณชื่อ: {this.state.firstname} {this.state.lastname}</Text>
-        <Text style={styles.title}>ยาวทั้งหมด: {nameLength} ตัวอักษร</Text>
+        <Button onPress={this.handleGo}
+          title='ไป' />
+        <WebView source={{ uri: this.state.gourl }} style={styles.webview} />
       </SafeAreaView>
     );
   }
@@ -56,13 +57,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
 
-  title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#3a3',
-    padding: 5,
-    margin: 20,
-    alignSelf: 'center',
+  webview: {
+    flex: 1,
   },
 
   textinput: {
