@@ -2,13 +2,40 @@ import React from 'react';
 import {
   SafeAreaView,
   StyleSheet, Text, View,
-  Image, ScrollView,
+  Image, ScrollView, FlatList,
 } from 'react-native';
 
 import profileImage from './assets/profile.png';
 
 export default class App extends React.Component {
   render() {
+    const renderRow = (rowData)=>{
+      const item = rowData.item;
+      return (
+        <View style={styles.row}>
+          <Text style={styles.rowText}>{item.name}</Text>
+        </View>
+      )
+    };
+
+    const students = [
+      {key: '1', name: 'student 1'},
+      {key: '2', name: 'student 2'},
+      {key: '3', name: 'student 3'},
+      {key: '4', name: 'student 4'},
+      {key: '5', name: 'student 5'},
+      {key: '6', name: 'student 6'},
+      {key: '7', name: 'student 7'},
+      {key: '8', name: 'student 8'},
+      {key: '9', name: 'student 9'},
+      {key: '10', name: 'student 10'},
+      {key: '11', name: 'student 11'},
+      {key: '12', name: 'student 12'},
+      {key: '13', name: 'student 13'},
+      {key: '14', name: 'student 14'},
+      {key: '15', name: 'student 15'},
+    ]
+
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topbar}>
@@ -17,12 +44,7 @@ export default class App extends React.Component {
           <Text style={styles.expandedText}>3</Text>
         </View>
         <ScrollView style={styles.main}>
-          <Image style={styles.image} source={profileImage} />
-          <Image style={styles.image} source={profileImage} />
-          <Image style={styles.image} source={profileImage} />
-          <Image style={styles.image} source={profileImage} />
-          <Image style={styles.image} source={profileImage} />
-          <Image style={styles.image} source={profileImage} />
+          <FlatList data={students} renderItem={renderRow} />
         </ScrollView>
         <View style={styles.bottombar}>
           <Text style={styles.text}>I am bottom text</Text>
@@ -78,4 +100,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
 
+  row: {
+    padding: 5,
+  },
+  rowText: {
+    fontWeight: 'bold',
+    fontSize: 48,
+  }
 });
