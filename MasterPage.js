@@ -5,6 +5,10 @@ import {
 } from 'react-native';
 
 export default class MasterPage extends React.Component {
+  static navigationOptions = {
+    title: 'Master Page',
+  };
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
