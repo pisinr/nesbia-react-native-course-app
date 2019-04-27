@@ -13,40 +13,84 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currency: 'THB'
+      amount: '0',
+      currency: 'THB',
+      data: []
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.handleAmountChange = this.handleAmountChange.bind(this);
   }
 
+  handleSubmit() {
+    const currency = this.state.currency;
+    fetch('https://api.exchangeratesapi.io/latest?base=' + currency)
+      .then((response) => { return response.json() })
+      .then((json) => {
+        let rates = json.rates;
+        let data = [];
+        for(let key in rates) {
+          data.push({
+            key: key,
+            value: rates[key]
+          })
+        }
+        this.setState({
+          data: data
+        })
+      })
+  }
+
+  handleAmountChange(text) {
+    this.setState({
+      amount: text
+    })
+  }
+
+  handleCurrencyChange(value) {
+    this.setState({
+      currency: value
+    })
+  }
+
+
   render() {
+    let amountFloat = parseFloat(this.state.amount)
+
+
     const renderRow = (rowData) => {
       const item = rowData.item;
       return (
-        <View>
-          <Text>{item.key}:</Text>
-          <Text>{item.value}</Text>
+        <View style={styles.row}>
+          <Text style={{flex: 1}}>{item.key}:</Text>
+          <Text style={{flex: 1}}>{item.value}</Text>
+          <Text style={{flex: 1, textAlign: 'right'}}>{parseFloat(item.value) * amountFloat}</Text>
         </View>
       )
     }
 
-    const data = [
-      {key: 'USD', value: 1},
-      {key: 'THB', value: 30},
-    ]
+    const data = this.state.data;
 
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.row}>
           <Text style={styles.text}>เงิน: </Text>
-          <TextInput style={styles.textinput}
-            value={'1'} />
+          <TextInput
+            onChangeText={this.handleAmountChange}
+            style={styles.textinput}
+            value={this.state.amount} />
         </View>
-        <Picker style={{backgroundColor: 'red'}}
+        <Picker
+          onValueChange={this.handleCurrencyChange}
+          style={{backgroundColor: 'red'}}
           selectedValue={this.state.currency}>
           <Picker.Item label="THB" value="THB" />
           <Picker.Item label="JPY" value="JPY" />
           <Picker.Item label="USD" value="USD" />
         </Picker>
-        <Button title="คำนวณ"/>
+        <Button onPress={this.handleSubmit}
+          title="คำนวณ"/>
         <FlatList data={data}
           renderItem={renderRow}
           />
