@@ -1,13 +1,15 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
-import MasterPage from './MasterPage'
-import DetailPage from './DetailPage'
+import HomePage from './HomePage'
+import FeedPage from './FeedPage'
+import SettingPage from './SettingPage'
 
-const AppNavigator = createStackNavigator({
-  Master: MasterPage,
-  Detail: DetailPage,
+const AppNavigator = createBottomTabNavigator({
+  Home: HomePage,
+  Feed: FeedPage,
+  Setting: SettingPage,
 }, {
-    initialRouteName: "Master"
+    initialRouteName: "Home"
 });
 
 export default createAppContainer(AppNavigator);
