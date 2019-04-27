@@ -10,26 +10,16 @@ export default class DetailPage extends React.Component {
         <Text>DetailPage for {this.props.navigation.getParam('name', '')}</Text>
         <Button
           title="John"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: 'John'
-          })}
         />
         <Button
           title="Jane"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: "Jane"
-          })}
         />
         <Button
           title="Joe"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: 'Joe'
-          })}
         />
         <Button
           title="Back"
           color="red"
-          onPress={() => this.props.navigation.goBack()}
         />
       </View>
     );

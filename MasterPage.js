@@ -11,21 +11,12 @@ export default class MasterPage extends React.Component {
         <Text>MasterPage</Text>
         <Button
           title="John"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: 'John'
-          })}
         />
         <Button
           title="Jane"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: "Jane"
-          })}
         />
         <Button
           title="Joe"
-          onPress={() => this.props.navigation.push('Detail', {
-            name: 'Joe'
-          })}
         />
       </View>
     );
