@@ -1,55 +1,67 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet, Text, View,
+  StyleSheet, View,
   Image, ScrollView, FlatList,
-  Button, TextInput,
-  Picker
+  Picker,
 } from 'react-native';
 
-import profileImage from './assets/profile.png';
+import {
+  Text, Button, Input,
+  Card, Rating, Avatar, CheckBox,
+  ListItem,
+} from 'react-native-elements'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      currency: 'THB'
-    }
   }
 
   render() {
-    const renderRow = (rowData) => {
-      const item = rowData.item;
-      return (
-        <View>
-          <Text>{item.key}:</Text>
-          <Text>{item.value}</Text>
-        </View>
-      )
-    }
-
-    const data = [
-      {key: 'USD', value: 1},
-      {key: 'THB', value: 30},
-    ]
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.row}>
-          <Text style={styles.text}>เงิน: </Text>
-          <TextInput style={styles.textinput}
-            value={'1'} />
-        </View>
-        <Picker style={{backgroundColor: 'red'}}
-          selectedValue={this.state.currency}>
-          <Picker.Item label="THB" value="THB" />
-          <Picker.Item label="JPY" value="JPY" />
-          <Picker.Item label="USD" value="USD" />
-        </Picker>
-        <Button title="คำนวณ"/>
-        <FlatList data={data}
-          renderItem={renderRow}
-          />
+        <ScrollView>
+          <Card>
+            <Text h1>Header 1</Text>
+            <Text h2>Header 2</Text>
+            <Text h3>Header 3</Text>
+          </Card>
+          <Card>
+            <Input placeholder="ชื่อ" />
+            <Input placeholder="นามสกุล" />
+          </Card>
+          <Card>
+            <Button title="คำนวณ"/>
+          </Card>
+          <Card>
+            <Rating />
+          </Card>
+          <Card>
+            <CheckBox title="ยอมรับข้อตกลง" checked />
+          </Card>
+          <Card>
+            <ListItem bottomDivider
+              title="รายการ 1"  subtitle="รายละเอียด 1"
+              />
+            <ListItem bottomDivider
+              title="รายการ 2"  subtitle="รายละเอียด 2"
+              checkBox={{checked: true}}
+              />
+            <ListItem bottomDivider
+              title="รายการ 3"  subtitle="รายละเอียด 3"
+              switch={{}}
+              />
+            <ListItem bottomDivider
+              title="รายการ 4"  subtitle="รายละเอียด 4"
+              chevron
+              />
+            <ListItem bottomDivider
+              title="รายการ 5"  subtitle="รายละเอียด 5"
+              badge={{status: 'success', value: '5'}}
+              />
+          </Card>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -58,27 +70,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
   },
-
-  text: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#3a3',
-    padding: 3,
-    marginRight: 10,
-  },
-
-  textinput: {
-    flex: 1,
-    backgroundColor: 'yellow',
-    fontSize: 28,
-    padding: 3,
-    margin: 6,
-  },
-
-  row: {
-    flexDirection: 'row',
-    padding: 3,
-  }
 });
